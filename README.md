@@ -27,7 +27,7 @@ cd ..
 catkin_make
 ```
 
-- Add the build files to ros:
+- Add the build files to environment:
 ```
 source devel/setup.bash
 ```
