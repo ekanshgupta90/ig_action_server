@@ -22,6 +22,10 @@ tokens = [
   "SAY",
   "LOCATE",
   "MOVETO",
+  "MOVEABS",
+  "MOVEREL",
+  "TURNABS",
+  "TURNREL",
   "VISIBLE",
   "STOP"
 ]
@@ -47,7 +51,10 @@ t_VISIBLE =      r"Visible"
 t_STOP =         r"Stop"
 t_MOVETO =       r"MoveTo"
 t_LOCATE =       r"Locate"
-
+t_MOVEABS =      r"MoveAbs"
+t_MOVEREL =      r"MoveRel"
+t_TURNABS =      r"TurnAbs"
+t_TURNREL =      r"TurnRel"
 # more complex tokens
 
 def t_NUM(t):

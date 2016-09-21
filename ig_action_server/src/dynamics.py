@@ -26,6 +26,18 @@ def doaction(action):
     (x,y) = action.params
     publisher.publish ("Moving to pose of (%s, %s)" %(x,y))
     turtlebot.moveTo (x,y)
+  elif action.operator == MOVEABS:
+    (x,y,v) = action.params # x,y coordinates and linear velocity.
+    print "Using move absolute!"
+  elif action.operator == MOVEREL:
+    (x,y,v) = action.params # x,y distance from current pos and linear velocity.
+    print "Using move relative!"
+  elif action.operator == TURNABS:
+    (d,r) = action.params # direction and rotational velocity. D = South, North, East, West
+    print "Using turn absolute!"
+  elif action.operator == TURNREL:
+    (d,r) = action.params # Degree from current orientation and rotational velocity.
+    print "Using turn relative!"
   else:
     publisher.publish("Runtime Error: Unsupported action!");
     raise Exception("Runtime Error: Unsupported action!")

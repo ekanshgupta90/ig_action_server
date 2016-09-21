@@ -113,10 +113,10 @@ def move(distance, angular, speed, delta_y, rotation):
     publisher.close_move_base_action_client()
   # create a twist message, fill it in to turn
   else:
-    twist.angular.z = radians(90)*rotation #0.785398*2*rotation    # 90 deg/s
-    for i in range(int(2*angular)):
+    twist.angular.z = radians(45)*rotation #0.785398*2*rotation    # 90 deg/s
+    for i in range(0,int(10*angular)):
       cmd_vel.publish(twist)
-      rospy.sleep(0.5)
+      rospy.sleep(0.2)
 
 def moveAllAtOnce(distance, angular, speed, delta_y, rotation):
   if not SETUP_DONE: setup()
@@ -161,8 +161,8 @@ def moveAllAtOnce(distance, angular, speed, delta_y, rotation):
     publisher.close_move_base_action_client()
   # create a twist message, fill it in to turn
   else:
-    twist.angular.z = radians(90)*rotation #0.785398*2*rotation    # 90 deg/s
-    for i in range(int(2*angular)):
+    twist.angular.z = radians(45)*rotation #0.785398*2*rotation    # 90 deg/s
+    for i in range(0,int(10*angular)):
       cmd_vel.publish(twist)
-      rospy.sleep(0.5)
+      rospy.sleep(0.2)
 

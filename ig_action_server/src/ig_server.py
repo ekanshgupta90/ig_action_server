@@ -17,6 +17,9 @@ import sys
 from constants import *
 from statics import findn
 import turtlebot_move_base_actions as turtlebot
+import turtlebot_actions_2 as turtlebot2
+
+import traceback
 
 lexer = lex.lex(module=lexerIG)
 parser = yacc.yacc(module=parserIG)
@@ -30,6 +33,7 @@ class IGServer(object):
 		self._as = actionlib.SimpleActionServer(self._name, ig_action_msgs.msg.InstructionGraphAction, execute_cb=self.execute_cb, auto_start = False)
 		self._as.start()
 		rospy.loginfo('IG action server is running!')
+
 
 	def execute_cb(self, goal):
 		# Setting the rate of execution.
@@ -47,7 +51,10 @@ class IGServer(object):
 			ast = parser.parse(goal.order)
 		except Exception, e:
 			self._success = False
+			print e
 			rospy.loginfo('Failed parsing')
+
+			traceback.print_exc()
 		else:
 			self.publish_feedback('Validating instructions')
 			assert(statics.valid(ast))
@@ -98,6 +105,18 @@ class IGServer(object):
 			(x,y) = action.params
 			self.publish_feedback("Moving to pose of (%s, %s)" %(x,y))
 			turtlebot.moveTo (x,y)
+		elif action.operator == MOVEABS:
+			(x,y,v) = action.params # x,y coordinates on the map and velocity for movement.
+			turtlebot2.moveAbs(x,y,v)
+		elif action.operator == MOVEREL:
+			(x,y,v) = action.params # x,y distance forward on the map and velocity for movement.
+			turtlebot2.moveRel(x,y,v)
+		elif action.operator == TURNABS:
+			(d,r) = action.params # direction and rotational velocity. d = N, S, E, W (North, South, East, West)
+			turtlebot2.turnAbs(a,d)
+		elif action.operator == TURNREL:
+			(a,r) = action.params # Angle and rotational velocity.
+			turtlebot2.turnRel(a,r)
 		else:
 			self.publish_feedback("Runtime Error: Unsupported action!");
 			self._success = False

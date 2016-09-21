@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'cT\x88\xde\x0f8v\xbd\x9b\x9c\x1e\xe1\xe9[\x9b\x9a'
+_lr_signature = 'a:\xd8\x05\x05\x94\xf3\x8eV\xfc\xc0e|\x1d`U'
     
-_lr_action_items = {'LPAR':([1,5,22,23,24,25,28,29,],[3,7,31,32,33,34,37,38,]),'CONS':([9,27,],[12,-4,]),'DO':([14,],[18,]),'MOVE':([18,],[24,]),'STOP':([20,36,],[28,28,]),'RPAR':([8,10,15,16,19,21,43,44,47,57,58,60,61,62,71,],[-2,13,-3,-9,27,-8,52,-5,55,63,64,-6,66,-7,72,]),'STRING':([34,38,54,],[43,47,61,]),'MOVETO':([18,],[23,]),'VISIBLE':([20,36,],[29,29,]),'SAY':([18,],[25,]),'NUM':([7,17,31,32,33,35,37,39,49,50,51,53,56,65,68,70,],[11,21,40,41,42,44,46,48,57,58,59,60,62,67,69,71,]),'COMMA':([4,11,27,40,41,42,46,59,67,69,],[6,14,-4,49,50,51,54,65,68,70,]),'THEN':([26,30,45,52,55,63,64,66,72,],[35,39,53,-11,-14,-13,-12,-15,-10,]),'$end':([2,13,],[0,-1,]),'LOCATE':([18,],[22,]),'END':([14,],[16,]),'GOTO':([14,],[17,]),'ELSE':([48,],[56,]),'P':([0,],[1,]),'V':([3,6,12,],[5,5,5,]),'UNTIL':([26,52,63,64,72,],[36,-11,-13,-12,-10,]),'IF':([14,],[20,]),'NIL':([6,12,],[8,8,]),}
+_lr_action_items = {'LPAR':([1,5,22,23,24,25,26,27,28,30,32,33,],[3,7,35,36,37,38,39,40,41,44,45,46,]),'CONS':([9,31,],[12,-4,]),'MOVEABS':([18,],[25,]),'DO':([14,],[18,]),'MOVE':([18,],[26,]),'STOP':([20,43,],[32,32,]),'RPAR':([8,10,15,16,19,21,53,55,59,73,74,78,79,80,81,82,91,92,99,],[-2,13,-3,-9,31,-8,66,-5,71,83,84,88,-6,89,90,-7,94,95,100,]),'TURNABS':([18,],[30,]),'STRING':([40,44,46,70,],[53,57,59,81,]),'MOVETO':([18,],[23,]),'TURNREL':([18,],[28,]),'VISIBLE':([20,43,],[33,33,]),'SAY':([18,],[27,]),'NUM':([7,17,35,36,37,38,39,41,42,45,47,61,62,63,64,65,67,68,69,72,85,86,87,96,98,],[11,21,48,49,50,51,52,54,55,58,60,73,74,75,76,77,78,79,80,82,91,92,93,97,99,]),'COMMA':([4,11,31,48,49,50,51,52,54,57,58,75,76,77,93,97,],[6,14,-4,61,62,63,64,65,67,69,70,85,86,87,96,98,]),'THEN':([29,34,56,66,71,83,84,88,89,90,94,95,100,],[42,47,68,-11,-18,-13,-12,-17,-16,-19,-15,-14,-10,]),'$end':([2,13,],[0,-1,]),'LOCATE':([18,],[22,]),'END':([14,],[16,]),'GOTO':([14,],[17,]),'ELSE':([60,],[72,]),'P':([0,],[1,]),'V':([3,6,12,],[5,5,5,]),'UNTIL':([29,66,83,84,88,89,94,95,100,],[43,-11,-13,-12,-17,-16,-15,-14,-10,]),'IF':([14,],[20,]),'MOVEREL':([18,],[24,]),'NIL':([6,12,],[8,8,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'vertex':([3,6,12,],[4,9,9,]),'vertices':([6,12,],[10,15,]),'content':([14,],[19,]),'cnd':([20,36,],[30,45,]),'program':([0,],[2,]),'action':([18,],[26,]),}
+_lr_goto_items = {'vertex':([3,6,12,],[4,9,9,]),'vertices':([6,12,],[10,15,]),'content':([14,],[19,]),'cnd':([20,43,],[34,56,]),'program':([0,],[2,]),'action':([18,],[29,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -39,6 +39,10 @@ _lr_productions = [
   ('action -> SAY LPAR STRING RPAR','action',4,'p_action','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',99),
   ('action -> MOVETO LPAR NUM COMMA NUM RPAR','action',6,'p_action','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',100),
   ('action -> LOCATE LPAR NUM COMMA NUM RPAR','action',6,'p_action','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',101),
-  ('cnd -> VISIBLE LPAR STRING RPAR','cnd',4,'p_cnd','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',112),
-  ('cnd -> STOP LPAR NUM COMMA STRING RPAR','cnd',6,'p_cnd','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',113),
+  ('action -> MOVEABS LPAR NUM COMMA NUM COMMA NUM RPAR','action',8,'p_action','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',102),
+  ('action -> MOVEREL LPAR NUM COMMA NUM COMMA NUM RPAR','action',8,'p_action','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',103),
+  ('action -> TURNABS LPAR STRING COMMA NUM RPAR','action',6,'p_action','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',104),
+  ('action -> TURNREL LPAR NUM COMMA NUM RPAR','action',6,'p_action','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',105),
+  ('cnd -> VISIBLE LPAR STRING RPAR','cnd',4,'p_cnd','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',124),
+  ('cnd -> STOP LPAR NUM COMMA STRING RPAR','cnd',6,'p_cnd','/home/ej/catkin_ws/src/ig_action_server/src/parserIG.py',125),
 ]

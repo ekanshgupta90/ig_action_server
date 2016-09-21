@@ -12,6 +12,10 @@ VISIBLE =  9
 STOP =    10
 LOCATE = 14
 MOVETO = 15
+MOVEABS = 16
+MOVEREL = 17
+TURNABS = 18
+TURNREL = 19
 
 # trystep result constants
 TERMINATED = 11

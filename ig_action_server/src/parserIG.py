@@ -41,7 +41,7 @@ class Content(Node):
 class Action(Node):
   def __init__(self, operator, params):
     super(Action, self).__init__(operator, params)
-    assert(operator in [MOVE, SAY, MOVETO, LOCATE])
+    assert(operator in [MOVE, SAY, MOVETO, LOCATE, MOVEABS, MOVEREL, TURNABS, TURNREL])
 
 class Condition(Node):
   def __init__(self, operator, params):
@@ -98,13 +98,25 @@ def p_action(t):
   """action : MOVE LPAR NUM    COMMA NUM     COMMA NUM    COMMA NUM    COMMA NUM RPAR
             | SAY  LPAR STRING RPAR
             | MOVETO LPAR NUM COMMA NUM RPAR
-            | LOCATE LPAR NUM COMMA NUM RPAR"""
+            | LOCATE LPAR NUM COMMA NUM RPAR
+            | MOVEABS LPAR NUM COMMA NUM COMMA NUM RPAR
+            | MOVEREL LPAR NUM COMMA NUM COMMA NUM RPAR
+            | TURNABS LPAR STRING COMMA NUM RPAR
+            | TURNREL LPAR NUM COMMA NUM RPAR"""
   if t[1] == "Move":
     t[0] = Action(MOVE, (t[3], t[5], t[7], t[9], t[11]))
   elif t[1] == "MoveTo":
     t[0] = Action(MOVETO, (t[3], t[5]))
   elif t[1] == "Locate":
     t[0] = Action(LOCATE, (t[3], t[5]))
+  elif t[1] == "MoveAbs":
+    t[0] = Action(MOVEABS, (t[3], t[5], t[7]))
+  elif t[1] == "MoveRel":
+    t[0] = Action(MOVEREL, (t[3], t[5], t[7]))
+  elif t[1] == "TurnAbs":
+    t[0] = Action(TURNABS, (t[3], t[5]))
+  elif t[1] == "TurnRel":
+    t[0] = Action(TURNREL, (t[3], t[5]))
   else:
     t[0] = Action(SAY, (t[3],))
 
