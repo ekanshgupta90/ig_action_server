@@ -32,6 +32,13 @@ catkin_make
 source devel/setup.bash
 ```
 
+- Run rospack to add the packages to roscd:
+```
+rospack depends1 ig_action_server
+
+rospack depends1 ig_action_client
+```
+
 ## Running
 
 - Run ROS Gazebo
