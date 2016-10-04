@@ -6,17 +6,18 @@ import actionlib
 from actionlib_msgs.msg import *
 import publisher
 from math import radians
+from math import degrees
 import dynamic_reconfigure.client
+from orientation import Orientation
 
 def moveAbs(x,y,v):
 	move (x,y,v,"Absolute");
 
-
 def moveRel(x,y,v):
 	move (x,y,v,"Relative");
 
-def turnAbs(d,r):
-	pass
+def turnAbs(d,r, init_time, init_yaw, current_time, current_yaw):
+	turn2(d, r, init_time, init_yaw, current_time, current_yaw)
 
 def turnRel(a,r):
 	turn(a,r)
@@ -30,7 +31,7 @@ def move(x,y,v,action):
 
 	move_base = publisher.move_base_action_client ()
     
-	print "mvoeing"
+	print "moving ->" + str(frameType)
 	goal = MoveBaseGoal()
 	goal.target_pose.header.frame_id = frameType
 	goal.target_pose.header.stamp = rospy.Time.now()
@@ -59,10 +60,37 @@ def turn(angle, rotation):
 		cmd_vel.publish(twist)
 		rospy.sleep(0.5)
 
+def turn2(d, r, init_time, init_yaw, current_time, current_yaw):
+	if init_yaw == None:
+		rospy.logerr("Initialization time is None, the startup was not correctly done!")
+	else:
+		orient = Orientation()
+		correct_yaw = orient.getCorrectedYaw(init_time, init_yaw, current_time, current_yaw)
+		print " Current_yaw ->" + str(correct_yaw)
+		if d == 'NORTH':
+			pass
+		elif d == 'SOUTH':
+			init_yaw = init_yaw + radians(180)
+		elif d == 'EAST':
+			init_yaw = init_yaw + radians(90)
+		elif d == 'WEST':
+			init_yaw = init_yaw - radians(90)
+		else:
+			rospy.logerr("Direction is not correct")
+
+		print "Direction_yaw ->" + str(init_yaw)
+		if correct_yaw > init_yaw:
+			angle = correct_yaw - init_yaw
+			turn(degrees(angle), -1)
+		else:
+			angle = init_yaw - correct_yaw
+			turn(degrees(angle), 1)
+
 def getCmdVel():
 	cmd_vel = rospy.Publisher("cmd_vel_mux/input/navi", Twist, queue_size=10)
 	rospy.sleep(1)
 	return cmd_vel
+
 
 def setVelocity(velocity, type):
 	client = dynamic_reconfigure.client.Client('move_base/DWAPlannerROS')
