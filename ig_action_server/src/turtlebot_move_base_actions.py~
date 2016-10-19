@@ -69,7 +69,7 @@ def moveTo(x, y):
     msg = "Reached the destination"
   else:
     rospy.loginfo("Unable to reach destination")
-    msg = "Unable to reach destination"
+    msg = "Unable to reach destination")
 
   # Sleep to give the last log messages time to be sent
   rospy.sleep(1)

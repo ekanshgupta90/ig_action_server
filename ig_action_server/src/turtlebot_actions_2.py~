@@ -69,7 +69,7 @@ def turn(angle, rotation):
 	return status,msg
 
 def turn2(d, r, init_time, init_yaw, current_time, current_yaw):
-	status=True
+	status=true
 	msg="Turned successfully"
 	if init_yaw == None:
 		rospy.logerr("Initialization time is None, the startup was not correctly done!")

@@ -205,13 +205,13 @@ class IGServer(object):
 		elif c.operator == DOONCE:
 			(a, n2) = c.params
 			self._success = self.doaction(a)
-			result = STEP if self._success else FAIL
+			result = STEP if self._sucess else FAIL
 			return (result, (n2, vs, I, [a] + O))
 		elif c.operator == DOUNTIL:
 			(a, cnd, n2) = c.params
 			b = checkcond(cnd)
 			self._sucess = self.doaction(a)
-			result = STEP if self._success else FAIL
+			result = STEP if self._sucess else FAIL
 			if b:
 		  		return (result, (n2, vs, I, [a] + O))
 			else:
