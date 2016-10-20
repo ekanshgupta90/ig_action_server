@@ -23,11 +23,12 @@ def turnRel(a,r):
 	return turn(a,r)
 
 def move(x,y,v,action):
+	print "MOVING TO x:" + str(x) + " y:" + str(y)
 	status=True
 	msg = "Successfully executed the vertex"
-	setVelocity(v, 'LINEAR');
+	#setVelocity(v, 'LINEAR');
 	if action == "Absolute":
-		frameType = 'map'
+		frameType = "map"
 	else:
 		frameType = 'base_link'
 
@@ -40,6 +41,7 @@ def move(x,y,v,action):
 	goal.target_pose.pose.position.x = x 
 	if frameType == 'map':
 		goal.target_pose.pose.position.y = y #3 meters
+	
 	goal.target_pose.pose.orientation.w = 1.0 #go forward
 
 	move_base.send_goal(goal)
@@ -58,7 +60,7 @@ def move(x,y,v,action):
 def turn(angle, rotation):
 	status=True
 	msg ="Turned successfully"
-	setVelocity(rotation, 'ANGULAR');
+	# setVelocity(rotation, 'ANGULAR');
 	twist = Twist()
 	cmd_vel = getCmdVel()
 	cycles = int(angle/45)

@@ -79,7 +79,7 @@ class IGServer(object):
 			self.eval(ast)
 		
 		# end core code
-		r.sleep()
+		#r.sleep()
 
 		# On success setting results topic
 		if self._success:
